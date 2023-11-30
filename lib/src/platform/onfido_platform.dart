@@ -13,6 +13,7 @@ abstract class OnfidoPlatform {
       EnterpriseFeatures? enterpriseFeatures,
       bool? disableNFC,
       OnfidoMediaCallback? mediaCallback,
+      OnfidoAnalyticsCallback? analyticsCallback,
       OnfidoTheme? onfidoTheme});
 
   Future<void> startWorkflow(
@@ -20,6 +21,7 @@ abstract class OnfidoPlatform {
       required String workflowRunId,
       IOSAppearance? iosAppearance,
       OnfidoMediaCallback? mediaCallback,
+      OnfidoAnalyticsCallback? analyticsCallback,
       String? iosLocalizationFileName,
       EnterpriseFeatures? enterpriseFeatures,
       OnfidoTheme? onfidoTheme});

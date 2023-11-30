@@ -37,6 +37,17 @@ struct StartStudioBridge: BaseBridge {
                 }
             })
 
+            onfidoFlow.with(eventHandler: {
+                (event: Event) -> () in
+                let analyticsEvent = AnalyticsEvent(eventName: event.name, properties: event.properties)
+                let serializedEvent = analyticsEvent.toDictionary()
+                guard let channel = SwiftOnfidoSdkPlugin.channel else { return }
+                    
+                DispatchQueue.main.async {
+                    channel.invokeMethod("onAnalyticsCaptured", arguments: serializedEvent)
+                }
+            })
+
             getFlutterViewController()?.present(try onfidoFlow.run(), animated: true)
         } catch {
             result(FlutterError(code: "configuration", message: error.localizedDescription, details: "\(error)"))

@@ -17,6 +17,7 @@ class Onfido {
       EnterpriseFeatures? enterpriseFeatures,
       bool? disableNFC,
       OnfidoMediaCallback? mediaCallback,
+      OnfidoAnalyticsCallback? analyticsCallback,
       OnfidoTheme? onfidoTheme})
       : _sdkToken = sdkToken,
         _iOSLocalizationFileName = iosLocalizationFileName,
@@ -24,6 +25,7 @@ class Onfido {
         _iosAppearance = iosAppearance,
         _disableNFC = disableNFC,
         _mediaCallback = mediaCallback,
+        _analyticsCallback = analyticsCallback,
         _onfidoTheme = onfidoTheme;
 
   final String _sdkToken;
@@ -32,31 +34,36 @@ class Onfido {
   final IOSAppearance? _iosAppearance;
   final bool? _disableNFC;
   final OnfidoMediaCallback? _mediaCallback;
+  final OnfidoAnalyticsCallback? _analyticsCallback;
   final OnfidoTheme? _onfidoTheme;
 
   /// Start Onfido SDK using [FlowSteps].
   /// - The [flowSteps] allows you to configure which screens are going to be displayed in the flow. For more information see the [Start the Flow](https://github.com/onfido/flutter-sdk/#start-the-flow) section.
   Future<List<OnfidoResult>> start({required FlowSteps flowSteps}) {
     return OnfidoPlatform.instance.start(
-        sdkToken: _sdkToken,
-        flowSteps: flowSteps,
-        iosAppearance: _iosAppearance,
-        iosLocalizationFileName: _iOSLocalizationFileName,
-        enterpriseFeatures: _enterpriseFeatures,
-        disableNFC: _disableNFC,
-        mediaCallback: _mediaCallback,
-        onfidoTheme: _onfidoTheme);
+      sdkToken: _sdkToken,
+      flowSteps: flowSteps,
+      iosAppearance: _iosAppearance,
+      iosLocalizationFileName: _iOSLocalizationFileName,
+      enterpriseFeatures: _enterpriseFeatures,
+      disableNFC: _disableNFC,
+      mediaCallback: _mediaCallback,
+      onfidoTheme: _onfidoTheme,
+      analyticsCallback: _analyticsCallback,
+    );
   }
 
   /// Start Onfido SDK using [Workflow].
   Future<void> startWorkflow(String workflowRunId) {
     return OnfidoPlatform.instance.startWorkflow(
-        sdkToken: _sdkToken,
-        workflowRunId: workflowRunId,
-        iosAppearance: _iosAppearance,
-        mediaCallback: _mediaCallback,
-        iosLocalizationFileName: _iOSLocalizationFileName,
-        enterpriseFeatures: _enterpriseFeatures,
-        onfidoTheme: _onfidoTheme);
+      sdkToken: _sdkToken,
+      workflowRunId: workflowRunId,
+      iosAppearance: _iosAppearance,
+      mediaCallback: _mediaCallback,
+      iosLocalizationFileName: _iOSLocalizationFileName,
+      enterpriseFeatures: _enterpriseFeatures,
+      onfidoTheme: _onfidoTheme,
+      analyticsCallback: _analyticsCallback,
+    );
   }
 }
