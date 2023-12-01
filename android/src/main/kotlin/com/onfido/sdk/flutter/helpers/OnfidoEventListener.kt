@@ -6,6 +6,7 @@ import com.onfido.android.sdk.capture.analytics.OnfidoAnalyticsEvent
 import com.onfido.android.sdk.capture.analytics.OnfidoAnalyticsEventListener
 import com.onfido.android.sdk.capture.analytics.OnfidoAnalyticsPropertyKey
 import com.onfido.sdk.flutter.OnfidoPlugin
+import android.util.Log
 
 class OnfidoEventListener: OnfidoAnalyticsEventListener {
 
