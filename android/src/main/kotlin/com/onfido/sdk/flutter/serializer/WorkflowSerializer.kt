@@ -32,5 +32,6 @@ fun Any.deserializeWorkflowConfig(): WorkflowConfig {
     if (theme != null) {
         builder.withTheme(getTheme(theme))
     }
+    println("Building Onfido")
     return builder.build()
 }

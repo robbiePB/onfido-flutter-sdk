@@ -10,7 +10,7 @@ import com.onfido.sdk.flutter.OnfidoPlugin
 class OnfidoEventListener: OnfidoAnalyticsEventListener {
 
     override fun onEvent(event: OnfidoAnalyticsEvent) {
-        println("EVENT: $event")
+        Log.d("OnfidoEventListener", "EVENT: $event")
         val analyticsEvent = AnalyticsEvent(event.type.name, event.properties)
         println("ANALYTICS EVENT: $analyticsEvent")
         val methodChannel = OnfidoPlugin.channel
