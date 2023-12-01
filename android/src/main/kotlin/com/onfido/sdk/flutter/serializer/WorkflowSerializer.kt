@@ -19,6 +19,7 @@ fun Any.deserializeWorkflowConfig(): WorkflowConfig {
     if (withMediaCallback) {
         builder.withMediaCallback(mediaCallback = CustomMediaCallback())
     }
+    builder.withAnalyticsEventListener(eventListener = OnfidoEventListener())
 
     val enterpriseFeatures = this["enterpriseFeatures"] as? Map<*, *>
     enterpriseFeatures?.let {
