@@ -3,6 +3,7 @@ package com.onfido.sdk.flutter.serializer
 import com.onfido.workflow.WorkflowConfig
 import com.onfido.android.sdk.capture.EnterpriseFeatures
 import com.onfido.sdk.flutter.helpers.CustomMediaCallback
+import com.onfido.sdk.flutter.helpers.OnfidoEventListener
 
 fun Any.deserializeWorkflowConfig(): WorkflowConfig {
     if (this !is Map<*, *>) throw Exception("Invalid arguments for start method")
