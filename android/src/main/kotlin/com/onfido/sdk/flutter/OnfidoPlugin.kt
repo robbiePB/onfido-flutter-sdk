@@ -12,6 +12,7 @@ import com.onfido.sdk.flutter.api.FlutterActivityProvider
 import com.onfido.sdk.flutter.bridge.BaseMethod
 import com.onfido.sdk.flutter.bridge.StartMethod
 import com.onfido.sdk.flutter.bridge.StartStudioMethod
+import com.onfido.sdk.flutter.bridge.CancelFlowMethod
 import com.onfido.sdk.flutter.serializer.toFlutterResult
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -42,7 +43,8 @@ class OnfidoPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAwa
     private val methods: Map<String, BaseMethod> by lazy {
         listOf(
             StartMethod(this, onfido, flutterAssets!!),
-            StartStudioMethod(this, onfidoWorkflow)
+            StartStudioMethod(this, onfidoWorkflow),
+            CancelFlowMethod(this)
         ).associateBy { it.name }
     }
 
@@ -95,6 +97,10 @@ class OnfidoPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAwa
 
         if (requestCode == StartStudioMethod.startRequestCode) {
             this.handleOnfidoStudioResult(resultCode, data)
+            return true
+        }
+
+        if (requestCode == CancelFlowMethod.startRequestCode) {
             return true
         }
 
