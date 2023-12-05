@@ -18,6 +18,7 @@ class MethodChannelOnfido extends OnfidoPlatform {
 
   static OnfidoMediaCallback? _mediaCallback;
   static OnfidoAnalyticsCallback? _analyticsCallback;
+  static Function? _onFlowCancelled;
 
   @override
   Future<List<OnfidoResult>> start({
@@ -30,6 +31,7 @@ class MethodChannelOnfido extends OnfidoPlatform {
     bool? disableNFC,
     OnfidoTheme? onfidoTheme,
     OnfidoAnalyticsCallback? analyticsCallback,
+    Function? onFlowCancelled,
   }) async {
     final arguments = StartOptionsSerializer.serialize(
         sdkToken: sdkToken,
@@ -43,6 +45,7 @@ class MethodChannelOnfido extends OnfidoPlatform {
 
     _mediaCallback = mediaCallback;
     _analyticsCallback = analyticsCallback;
+    _onFlowCancelled = onFlowCancelled;
 
     final result = await methodChannel.invokeMethod('start', arguments);
     return OnfidoResultSerializer.deserialize(result);
@@ -58,6 +61,7 @@ class MethodChannelOnfido extends OnfidoPlatform {
     EnterpriseFeatures? enterpriseFeatures,
     OnfidoTheme? onfidoTheme,
     OnfidoAnalyticsCallback? analyticsCallback,
+    Function? onFlowCancelled,
   }) async {
     final arguments = StartStudioSerializer.serialize(
         sdkToken: sdkToken,
@@ -70,7 +74,7 @@ class MethodChannelOnfido extends OnfidoPlatform {
 
     _mediaCallback = mediaCallback;
     _analyticsCallback = analyticsCallback;
-
+    _onFlowCancelled = onFlowCancelled;
     await methodChannel.invokeMethod('startStudio', arguments);
   }
 
@@ -100,6 +104,14 @@ class MethodChannelOnfido extends OnfidoPlatform {
             final OnfidoAnalyticsEvent event =
                 OnfidoAnalyticsEventSerializer.deserialize(call.arguments);
             _analyticsCallback?.onEvent(event: event);
+            break;
+          }
+        case 'onFlowCancelled':
+          {
+            if (kDebugMode) {
+              print('onFlowCancelled call handler');
+            }
+            _onFlowCancelled?.call();
             break;
           }
         default:
