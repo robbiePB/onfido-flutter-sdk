@@ -74,6 +74,11 @@ class MethodChannelOnfido extends OnfidoPlatform {
     await methodChannel.invokeMethod('startStudio', arguments);
   }
 
+  @override
+  Future<void> cancelFlow() async {
+    await methodChannel.invokeMethod('cancelFlow');
+  }
+
   static Future<void> platformCallHandler(MethodCall call) {
     try {
       switch (call.method) {

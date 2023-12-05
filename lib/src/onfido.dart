@@ -66,4 +66,8 @@ class Onfido {
       analyticsCallback: _analyticsCallback,
     );
   }
+
+  Future<void> cancelFlow() {
+    return OnfidoPlatform.instance.cancelFlow();
+  }
 }

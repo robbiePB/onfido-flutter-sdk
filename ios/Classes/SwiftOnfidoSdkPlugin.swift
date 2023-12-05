@@ -11,7 +11,8 @@ public class SwiftOnfidoSdkPlugin: NSObject, FlutterPlugin {
     lazy var methods: [String: BaseBridge] = {
         let bridges: [BaseBridge] = [
             StartBridge(assetProvider: assetProvider),
-            StartStudioBridge()
+            StartStudioBridge(),
+            CancelFlowBridge()
         ]
 
         return bridges.reduce([String : BaseBridge]()) { dict, value in

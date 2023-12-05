@@ -25,4 +25,6 @@ abstract class OnfidoPlatform {
       String? iosLocalizationFileName,
       EnterpriseFeatures? enterpriseFeatures,
       OnfidoTheme? onfidoTheme});
+
+  Future<void> cancelFlow();
 }
