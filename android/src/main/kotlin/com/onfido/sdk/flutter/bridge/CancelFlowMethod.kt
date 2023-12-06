@@ -5,10 +5,10 @@ import android.os.Looper
 import com.onfido.sdk.flutter.api.FlutterActivityProvider
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
-import com.onfido.sdk.flutter.OnfidoPlugin
 
 internal class CancelFlowMethod(
-    private val activityProvider: FlutterActivityProvider
+    private val activityProvider: FlutterActivityProvider,
+    private val methodChannel: MethodChannel
 ) : BaseMethod {
     override val name: String = "cancelFlow"
 
@@ -20,7 +20,6 @@ internal class CancelFlowMethod(
         val activity = activityProvider.provide() ?: throw Exception("Invalid activity")
         activity.finish()
         
-        val methodChannel = OnfidoPlugin.channel
         Handler(Looper.getMainLooper()).post {
             methodChannel.invokeMethod("onFlowCancelled", null)
         }

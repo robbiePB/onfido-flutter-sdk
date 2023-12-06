@@ -44,7 +44,7 @@ class OnfidoPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAwa
         listOf(
             StartMethod(this, onfido, flutterAssets!!),
             StartStudioMethod(this, onfidoWorkflow),
-            CancelFlowMethod(this)
+            CancelFlowMethod(this, channel)
         ).associateBy { it.name }
     }
 
